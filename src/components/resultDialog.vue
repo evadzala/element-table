@@ -1,5 +1,5 @@
 <template>
-  <el-dialog v-model="resultDialogVisible">
+  <el-dialog v-model="resultDialogVisible" @close="emit('closeDialogVisible')">
     <div>{{ data }}</div>
   </el-dialog>
 </template>
@@ -16,7 +16,8 @@ export default {
       type: Array,
     }
   },
-  setup (props) {
+  emit: ['closeDialogVisible'],
+  setup (props, context) {
     const resultDialogVisible = ref(false)
 
     watch(() => props.isVisible, (value) => {
@@ -25,6 +26,7 @@ export default {
 
     return {
       resultDialogVisible,
+      emit: context.emit,
     }
   }
 }

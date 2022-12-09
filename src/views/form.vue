@@ -49,7 +49,7 @@
         />
       </div>
     </el-main>
-    <result-dialog :isVisible="resultDialogVisible" :data="beSelectedData" />
+    <result-dialog :isVisible="resultDialogVisible" :data="beSelectedData" @closeDialogVisible="closeDialog" />
   </el-container>
 </template>
 
@@ -133,6 +133,10 @@ export default {
       resultDialogVisible.value = true
     }
 
+    function closeDialog () {
+      resultDialogVisible.value = false
+    }
+
     const hasDone = () => {
       return homeworkData.filter(node => JSON.stringify(node.done) === 'true').length
     }
@@ -158,6 +162,7 @@ export default {
       pageChange,
       resultDialogVisible,
       sentData,
+      closeDialog,
       beSelectedData,
       scheduleFormatter,
     }
