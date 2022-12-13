@@ -8,34 +8,36 @@
           <el-button type="primary" @click="sentData" :disabled="!(multipleEvent.length > 0)">進行AI推論</el-button>
         </div>
       </div>
-      <el-table
-        :data="pageData"
-        style="width: 100%"
-        @selection-change="handleSelectionChange"
-      >
-        <el-table-column type="selection" />
-        <el-table-column property="imageName" label="影像檔名" />
-        <el-table-column property="author" label="上傳者" />
-        <el-table-column property="bodyPartCheck" label="身體部位" />
-        <el-table-column property="tool" label="診斷工具" />
-        <el-table-column property="AIModel" label="AI推論模組">
-          <template #default="scope">
-            <el-select v-model="scope.row.AIModel" class="m-2" placeholder="Select" size="small">
-              <el-option
-                v-for="item in modelOptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              />
-            </el-select>
-          </template>
-        </el-table-column>
-        <el-table-column property="done" label="推論進度" :formatter="scheduleFormatter" />
-  
-      </el-table>
-      <div class="proportion">
-        <div>
-          已推論 {{ hasDone() }} / 總張數{{ homeworkData.length }}
+      <div class="table_border">
+        <el-table
+          :data="pageData"
+          style="width: 100%"
+          @selection-change="handleSelectionChange"
+        >
+          <el-table-column type="selection" />
+          <el-table-column property="imageName" label="影像檔名" />
+          <el-table-column property="author" label="上傳者" />
+          <el-table-column property="bodyPartCheck" label="身體部位" />
+          <el-table-column property="tool" label="診斷工具" />
+          <el-table-column property="AIModel" label="AI推論模組">
+            <template #default="scope">
+              <el-select v-model="scope.row.AIModel" class="m-2" placeholder="Select" size="small">
+                <el-option
+                  v-for="item in modelOptions"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                />
+              </el-select>
+            </template>
+          </el-table-column>
+          <el-table-column property="done" label="推論進度" :formatter="scheduleFormatter" />
+    
+        </el-table>
+        <div class="proportion">
+          <div>
+            已推論 {{ hasDone() }} / 總張數{{ homeworkData.length }}
+          </div>
         </div>
       </div>
       <div class="pagination">
@@ -178,11 +180,18 @@ export default {
   margin-bottom: 20px;
 }
 
+.table_border {
+  border: 2px solid #909399;
+  margin-bottom: 20px;
+  padding: 15px;
+}
+
 .proportion {
   display: flex;
   justify-content: flex-start;
-  margin-top: 20px;
+  margin: 20px 0;
 }
+
 .pagination {
   display: flex;
   justify-content: center;
